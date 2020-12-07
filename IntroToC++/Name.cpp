@@ -1,35 +1,48 @@
 #include <iostream>
 
-void FizzBuzz(int num)
+
+
+int main() 
 {
-	//Same as Console.WriteLine();
-	
+	std::string help;
 
-	for (int i = 0; i <= num; i++)
+	int max = 100;
+	int min = 0;
+	int tries = 0;
 
-		if (i % 3 == false && i % 5 == false)
-		{
-			std::cout << i << ": FizzBuzz" << std::endl;
+	std::cout << "Think of a number between 1 and 100." << std::endl;
+
+	do 
+	{
+		int guess = 20 % (max - (min + 1)) + (min + 1);
+		std::cout << "I guess " << guess << std::endl;
+		std::cout << "Am I guess high, low, or correct?: ";	
+		std::cin >> help;
+
+		if (help == "high") 
+		{ 
+			std::cout << "I was too high." << std::endl;
+			max = guess;
+			tries++;
 		}
-		else if (i % 5 == false)
-		{
-			std::cout << i << ": Buzz" << std::endl;
+
+		if (help == "low")
+		{ 
+			std::cout << "I was too low." << std::endl;
+			min = guess;
+			tries++;
 		}
-		else if (i % 3 == false)
-		{
-			std::cout << i << ": Fizz" << std::endl;
+		if (tries == 5)
+		{ 
+			std::cout << "Hey.... did you change your number?" << std::endl;
 		}
-}
+	}
 
-int main()
-{
-	int num = 0;
 
-	std::cout << "Please type a number" << std::endl;
-	std::cin >> num;
+	while (help != "correct");
+	std::cout << "The computer's guess was correct after " << tries << " tries!" << std::endl;
 
-	FizzBuzz(num);
+	return(0);
 
-	system("pause");
-	return 1;
-}
+	//int guess = 2 % (max - (min + 1)) + (min + 1);
+} 
