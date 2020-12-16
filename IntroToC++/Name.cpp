@@ -6,14 +6,14 @@ int main()
     int enemyHealth = 50;
     int enemyWeapon;
     int playerWeapon;
-    int Round = 0;
+    int Round = 1;
     int swordDamage = 10;
     int gunDamage = 20;
     int bombDamage = 50;
 
     do
     {
-        if (Round == 0)
+        if (Round == 1)
         {
             std::cout << "\n Pick a weapon (1), (2), or (3):"<< std::endl;
             std::cout << "(1) Sword" << std::endl;
@@ -49,9 +49,8 @@ int main()
                 break;
             }
         }
-        Round == 1;
 
-
+       if(Round == 2)
         switch (enemyHealth)
         {
         case 1:
