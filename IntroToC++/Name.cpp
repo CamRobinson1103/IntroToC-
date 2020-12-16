@@ -1,150 +1,94 @@
 #include <iostream>
 
-char space[10] = { 'o','1','2','3','4','5','6','7','8','9' };
-
-int checkWin();
-void grid();
-
 int main()
 {
-    int player = 1, i, choice;
+    int playerHealth = 50;
+    int enemyHealth = 50;
+    int enemyWeapon;
+    int playerWeapon;
+    int Round = 0;
+    int swordDamage = 10;
+    int gunDamage = 20;
+    int bombDamage = 50;
 
-    char mark;
     do
     {
-        grid();
-        player = (player % 2) ? 1 : 2;
-
-        std::cout << "Player " << player << ", enter a number:  ";
-        std::cin >> choice;
-
-        mark = (player == 1) ? 'x' : 'o';
-
-        if (choice == 1 && space[1] == '1')
+        if (Round == 0)
         {
-            space[1] = mark;
+            std::cout << "\n Pick a weapon (1), (2), or (3):"<< std::endl;
+            std::cout << "(1) Sword" << std::endl;
+            std::cout << "(2) Gun" << std::endl;
+            std::cout << "(3) Bomb" << std::endl;
+            std::cin >> playerWeapon;
+
+            switch (playerWeapon)
+            {
+
+            case 1: 
+                std::cout << "\nPlayer chose a sword" << std::endl;
+                enemyHealth = enemyHealth - swordDamage;
+                std::cout << "Player inflicted " << swordDamage << " points on their enemy." << std::endl;
+                std::cout << "Player health is " << playerHealth << std::endl;
+                std::cout << "The enemy's health is " << enemyHealth << std::endl;
+                break;
+
+            case 2:
+                std::cout << "\nYou chose a gun" << std::endl;
+                enemyHealth = enemyHealth - gunDamage;
+                std::cout << "Player inflicted " << gunDamage << " points on their enemy." << std::endl;
+                std::cout << "Player health is " << playerHealth << std::endl;
+                std::cout << "The enemy's health is " << enemyHealth << std::endl;
+                break;
+
+            case 3:
+                std::cout << "\nYou chose a bomb" << std::endl;
+                enemyHealth = enemyHealth - bombDamage;
+                std::cout << "Player inflicted " << bombDamage << " points on their enemy." << std::endl;
+                std::cout << "Player health is " << playerHealth << std::endl;
+                std::cout << "The computer's health is " << enemyHealth << std::endl;
+                break;
+            }
+        }
+        Round == 1;
+
+
+        switch (enemyHealth)
+        {
+        case 1:
+            std::cout << "The enemy inflicted " << gunDamage << " points on player." << std::endl;
+            playerHealth = playerHealth - gunDamage;
+            std::cout << "Player health is " << playerHealth << std::endl;
+            std::cout << "Enemy's health is " << enemyHealth << std::endl;
+            break;
+
+        case 2:
+            std::cout << "The enemy inflicted " << swordDamage << " points on player." << std::endl;
+            playerHealth = playerHealth - swordDamage;
+            std::cout << "Player health is " << playerHealth << std::endl;
+            std::cout << "Enemy's health is " << enemyHealth << std::endl;
+            break;
+
+        case 3:
+            std::cout << "The enemy inflicted " << bombDamage << " points on player." << std::endl;
+            playerHealth = playerHealth - bombDamage;
+            std::cout << "Player health is " << playerHealth << std::endl;
+            std::cout << "Enemy's health is " << enemyHealth << std::endl;
+            break;
         }
 
-        else if (choice == 2 && space[2] == '2')
-        {
-            space[2] = mark;
-        }
 
-        else if (choice == 3 && space[3] == '3')
-        {
-            space[3] = mark;
-        }
-
-        else if (choice == 4 && space[4] == '4')
-        {
-            space[4] = mark;
-        }
-
-        else if (choice == 5 && space[5] == '5')
-        {
-            space[5] = mark;
-        }
-
-        else if (choice == 6 && space[6] == '6')
-        {
-            space[6] = mark;
-        }
-
-        else if (choice == 7 && space[7] == '7')
-        {
-            space[7] = mark;
-        }
-
-        else if (choice == 8 && space[8] == '8')
-        {
-            space[8] = mark;
-        }
-
-        else if (choice == 9 && space[9] == '9')
-        {
-            space[9] = mark;
-        }
-
-        else
-        {
-            std::cout << "Movement Unavailable ";
-        }
-        i = checkWin();
-
-        player++;
-    } while (i == -1);
-    grid();
-    if (i == 1)
-
-        std::cout << "==>\aPlayer " << --player << " win ";
-    else
-        std::cout << "==>\aTie";
-
-    std::cin.ignore();
-    std::cin.get();
-    return 0;
-}
-
-int checkWin()
-{
-    if (space[1] == space[2] && space[2] == space[3])
-    {
-        return 1;
-    }
-    else if (space[4] == space[5] && space[5] == space[6])
-    {
-        return 1;
-    }
-    else if (space[7] == space[8] && space[8] == space[9])
-    {
-        return 1;
-    }
-    else if (space[1] == space[4] && space[4] == space[7])
-    {
-        return 1;
-    }
-    else if (space[2] == space[5] && space[5] == space[8])
-    {
-        return 1;
-    }
-    else if (space[3] == space[6] && space[6] == space[9])
-    {
-        return 1;
-    }
-    else if (space[1] == space[5] && space[5] == space[9])
-    {
-        return 1;
-    }
-    else if (space[3] == space[5] && space[5] == space[7])
-    {
-        return 1;
     }
 
-    else if (space[1] != '1' && space[2] != '2' && space[3] != '3'
-        && space[4] != '4' && space[5] != '5' && space[6] != '6'
-        && space[7] != '7' && space[8] != '8' && space[9] != '9')
+    while (playerHealth > 0 && enemyHealth > 0);
     {
+        if (enemyHealth <= 0)
+            std::cout << "Player win!!" << std::endl;
+        if(playerHealth <= 0)
+            std::cout << "Player lose!!" << std::endl;
         return 0;
     }
 
 
 
-    else
-    {
-        return -1;
-    }
-
 }
 
-void grid()
-{
-    system("cls");
-
-    std::cout << "Player 1 = x    Player 2 = o   Press Enter after x or o" << std::endl;
-
-
-    std::cout << "  " << space[1] << "  ,  " << space[2] << "  ,  " << space[3] << std::endl;
-    std::cout << "  " << space[4] << "  ,  " << space[5] << "  ,  " << space[6] << std::endl;
-    std::cout << "  " << space[7] << "  ,  " << space[8] << "  ,  " << space[9] << std::endl;
-
-}
