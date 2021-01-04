@@ -57,29 +57,7 @@ int main()
     file.close();
 
 
-    bool binaryFileExample();
-    {
-        Character layer = Character();
-        player.health = 12;
-
-        std::fstream file;
-        file.open("save.dat", std::ios::out | std::ios::binary);
-        if (!file.is_open())
-            return false;
-        file.write((char*)&layer, sizeof(Character));
-        file.close();
-
-        Character layer2 = Character();
-        file.open("save.dat", std::ios::out | std::ios::binary);
-
-        if (!file.is_open())
-            return false;
-
-        file.write((char*)&layer2, sizeof(Character));
-        std::cout << layer2.health << std::endl;
-        file.close;
-        return true;
-    }
+    
 
 
     std::cout << player.health << std::endl;
@@ -131,7 +109,7 @@ int main()
             }
         }
 
-       if(Round == 2)
+       if (Round == 2)
         switch (enemy.health)
         {
         case 1:
