@@ -5,6 +5,11 @@
 
 int main()
 {
+    bool binaeyFile();
+    {
+
+    }
+
     Character player = Character();
     player.health = 50;
     player.swordDamage = 10;
@@ -23,11 +28,14 @@ int main()
     int Round = 1;
 
     std::fstream file;
-    file.open("save.txt", std::ios::out);
+    file.open("save.txt", std::ios::out|std::ios::binary||std::ios::app);
+    file.write((char*)&player, sizeof(Character));
     if (!file.is_open())
     {
         return 1;
     }
+
+    file.seekg(sizeof(Character) * 2, std::ios::beg);
 
     file << player.health << std::endl;
     file << player.swordDamage;
@@ -44,7 +52,8 @@ int main()
 
 
 
-    file.open("save.txt", std::ios::in);
+    file.open("save.txt", std::ios::in | std::ios::binary||std::ios::app);
+    file.write((char*)&player, sizeof(Character));
     file >> player.health;
     file >> player.swordDamage;
     file << player.gunDamage;
