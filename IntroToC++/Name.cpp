@@ -2,13 +2,16 @@
 #include <fstream>
 #include "Character.h"
 #include "Enemy.h"
+#include <string>
 
 int main()
 {
-    bool binaeyFile();
-    {
-
-    }
+    using namespace std;
+    struct Player {
+        int item_no;
+        string name;
+    };
+    
 
     Character player = Character();
     player.health = 50;
@@ -160,4 +163,56 @@ int main()
     return 0;
 
 }
+
+//#include<iostream>
+//#include<fstream>
+//using namespace std;
+//struct Player {
+//    int item_no;
+//    string name;
+//};
+//int main() {
+//    ofstream wf("save.txt", ios::out | ios::binary);
+//    if (!wf) {
+//        cout << "Cannot open file!" << endl;
+//        return 1;
+//    }
+//    Player items[3];
+//    items[0].item_no = 1;
+//    items[0].name = "Potion";
+//    items[1].item_no = 2;
+//    items[1].name = "Sword";
+//    items[2].item_no = 3;
+//    items[2].name = "Shield";
+//    for (int i = 0; i < 3; i++)
+//        wf.write((char*)&items[i], sizeof(Player));
+//    wf.close();
+//
+//    if (!wf.good()) {
+//        cout << "Error occurred at writing time!" << endl;
+//        return 1;
+//    }
+//
+//    ifstream rf("save.txt", ios::out | ios::binary);
+//    if (!rf) {
+//        cout << "Cannot open file!" << endl;
+//        return 1;
+//    }
+//    Player rstu[3];
+//    for (int i = 0; i < 3; i++)
+//        rf.read((char*)&rstu[i], sizeof(Player));
+//    rf.close();
+//    if (!rf.good()) {
+//        cout << "Error occurred at reading time!" << endl;
+//        return 1;
+//    }
+//    cout << "Player's Items:" << endl;
+//    for (int i = 0; i < 3; i++) {
+//        cout << "Item No: " << items[i].item_no << endl;
+//        cout << "Name: " << items[i].name << endl;
+//        cout << endl;
+//    }
+//    return 0;
+//}
+
 
