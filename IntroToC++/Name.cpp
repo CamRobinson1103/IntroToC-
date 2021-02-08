@@ -6,33 +6,40 @@
 
 int main()
 {
-    using namespace std;
-    struct Player {
-        int item_no;
-        string name;
-    };
-    
 
+    
+    //Loads player
     Character player = Character();
     player.health = 50;
     player.swordDamage = 10;
     player.gunDamage = 20;
     player.bombDamage = 50;
 
+    //Loads enemy
     Enemy enemy = Enemy();
     enemy.health = 50;
     enemy.swordDamage = 10;
     enemy.gunDamage = 20;
     enemy.bombDamage = 50;
 
-
+    //Sets up enemy attack round
     int enemyAttack;
+    //Sets up Payer attack round
     int playerAttack;
+    //Sets up turns
     int Round = 1;
 
+    //Create an instance of a file stream
     std::fstream file;
+
+    //Search for the file with the name given in the first
+    //argument. If no file with this name exists, one with
+    //the name is created. Then "std::ios::out" is used to
+    //say that we want to output data to the binary file.
     file.open("save.txt", std::ios::out|std::ios::binary||std::ios::app);
     file.write((char*)&player, sizeof(Character));
+
+    //Check is the file isn't opened. If so, return from main.
     if (!file.is_open())
     {
         return 1;
@@ -40,21 +47,25 @@ int main()
 
     file.seekg(sizeof(Character) * 2, std::ios::beg);
 
+    //Writes player's stats to the text file.
     file << player.health << std::endl;
     file << player.swordDamage;
     file << player.gunDamage;
     file << player.bombDamage;
 
+    //Writes enemy's stats to the text file.
     file << enemy.health << std::endl;
     file << enemy.swordDamage;
     file << enemy.gunDamage;
     file << enemy.bombDamage;
+
+    //Close the file when we're done.
     file.close();
 
     
 
 
-
+    //Loads from the binary file
     file.open("save.txt", std::ios::in | std::ios::binary||std::ios::app);
     file.write((char*)&player, sizeof(Character));
     file >> player.health;
@@ -66,11 +77,9 @@ int main()
     file >> enemy.swordDamage;
     file << enemy.gunDamage;
     file << enemy.bombDamage;
+
+    //Closes file once we're done
     file.close();
-
-
-    
-
 
     std::cout << player.health << std::endl;
     std::cout << player.swordDamage << std::endl;
@@ -84,8 +93,10 @@ int main()
 
     do
     {
+        //Starts Round 1
         if (Round == 1)
         {
+            //Selects a number for a weapon
             std::cout << "\n Pick a weapon (1), (2), or (3):"<< std::endl;
             std::cout << "(1) Sword" << std::endl;
             std::cout << "(2) Gun" << std::endl;
@@ -94,7 +105,7 @@ int main()
 
             switch (playerAttack)
             {
-
+                //Shows results for the corresponding number a player chooses
             case 1: 
                 std::cout << "\nPlayer chose a sword" << std::endl;
                 enemy.health = enemy.health - player.swordDamage;
@@ -122,8 +133,10 @@ int main()
         }
 
        if (Round == 2)
+           //Enemy's turn
         switch (enemy.health)
         {
+            ////Shows results for the corresponding choice of the enemy
         case 1:
             std::cout << "The enemy inflicted " << enemy.gunDamage << " points on player." << std::endl;
             player.health = player.health - enemy.gunDamage;
@@ -148,71 +161,21 @@ int main()
 
 
     }
-
+    //Results from the battle
     while (player.health > 0 && enemy.health > 0);
     {
+        //If player wins, this is displayed
         if (enemy.health <= 0)
             std::cout << "Player win!!" << std::endl;
+        //If player wins, this is displayed
         if(player.health <= 0)
             std::cout << "Player lose!!" << std::endl;
         return 0;
     }
-
-
-
     return 0;
 
 }
 
-//#include<iostream>
-//#include<fstream>
-//using namespace std;
-//struct Player {
-//    int item_no;
-//    string name;
-//};
-//int main() {
-//    ofstream wf("save.txt", ios::out | ios::binary);
-//    if (!wf) {
-//        cout << "Cannot open file!" << endl;
-//        return 1;
-//    }
-//    Player items[3];
-//    items[0].item_no = 1;
-//    items[0].name = "Potion";
-//    items[1].item_no = 2;
-//    items[1].name = "Sword";
-//    items[2].item_no = 3;
-//    items[2].name = "Shield";
-//    for (int i = 0; i < 3; i++)
-//        wf.write((char*)&items[i], sizeof(Player));
-//    wf.close();
-//
-//    if (!wf.good()) {
-//        cout << "Error occurred at writing time!" << endl;
-//        return 1;
-//    }
-//
-//    ifstream rf("save.txt", ios::out | ios::binary);
-//    if (!rf) {
-//        cout << "Cannot open file!" << endl;
-//        return 1;
-//    }
-//    Player rstu[3];
-//    for (int i = 0; i < 3; i++)
-//        rf.read((char*)&rstu[i], sizeof(Player));
-//    rf.close();
-//    if (!rf.good()) {
-//        cout << "Error occurred at reading time!" << endl;
-//        return 1;
-//    }
-//    cout << "Player's Items:" << endl;
-//    for (int i = 0; i < 3; i++) {
-//        cout << "Item No: " << items[i].item_no << endl;
-//        cout << "Name: " << items[i].name << endl;
-//        cout << endl;
-//    }
-//    return 0;
-//}
+
 
 
